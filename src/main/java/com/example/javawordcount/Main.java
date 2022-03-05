@@ -1,10 +1,8 @@
 package com.example.javawordcount;
 
-import java.sql.Array;
 import java.util.*;
 
 import static com.example.javawordcount.Constants.unText;
-import static com.example.javawordcount.Constants.unTextTest;
 
 public class Main {
 
@@ -13,18 +11,21 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String unTextWithNoPunctuation
-                = unText.replaceAll(REGEX, "");
-        String[] words = unTextWithNoPunctuation.split(" +");
-
+        String[] words = extractWordsFromText();
         Map<String, Integer> map = constructMapFromWords(words);
         ArrayList<Integer> values = createSortedArrayListFromValuesOfHashMap(map);
-
-        printTheWordsInHighestOccurencesFirstOrder(map, values);
+        printWordsInHighestOccurencesFirstOrder(map, values);
 
     }
 
-    private static void printTheWordsInHighestOccurencesFirstOrder(Map<String, Integer> map, ArrayList<Integer> values) {
+    private static String[] extractWordsFromText() {
+        String unTextWithNoPunctuation
+                = unText.replaceAll(REGEX, "");
+        String[] words = unTextWithNoPunctuation.split(" +");
+        return words;
+    }
+
+    private static void printWordsInHighestOccurencesFirstOrder(Map<String, Integer> map, ArrayList<Integer> values) {
         for (int i = 0; i < 50; i++) {
             int value = values.get(i);
             String key = "";
